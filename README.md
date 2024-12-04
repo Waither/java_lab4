@@ -94,9 +94,9 @@ Ksztalt o ID 1 został pomyślnie usunięty z bazy danych.
         <tfoot>
             <tr>
                 <td>Total</td>
-                <td class="bar">26 of 245</td>
+                <td class="ctr2">26 of 245</td>
                 <td class="ctr2">89%</td>
-                <td class="bar">10 of 18</td>
+                <td class="ctr2">10 of 18</td>
                 <td class="ctr2">44%</td>
                 <td class="ctr1">9</td>
                 <td class="ctr2">24</td>
