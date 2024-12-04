@@ -113,24 +113,18 @@ Ksztalt o ID 1 został pomyślnie usunięty z bazy danych.
                 <td id="a0">
                     <a href="com.lab4/index.html" class="el_package">com.lab4</a>
                 </td>
-                <td class="bar" id="b0">
-                    <img src="jacoco-resources/redbar.gif" width="12" height="10" title="26" alt="26"/>
-                    <img src="jacoco-resources/greenbar.gif" width="107" height="10" title="219" alt="219"/>
-                </td>
-                <td class="ctr2" id="c0">89%</td>
-                <td class="bar" id="d0">
-                    <img src="jacoco-resources/redbar.gif" width="66" height="10" title="10" alt="10"/>
-                    <img src="jacoco-resources/greenbar.gif" width="53" height="10" title="8" alt="8"/>
-                </td>
-                <td class="ctr2" id="e0">44%</td>
-                <td class="ctr1" id="f0">9</td>
-                <td class="ctr2" id="g0">24</td>
-                <td class="ctr1" id="h0">14</td>
-                <td class="ctr2" id="i0">79</td>
-                <td class="ctr1" id="j0">1</td>
-                <td class="ctr2" id="k0">15</td>
-                <td class="ctr1" id="l0">0</td>
-                <td class="ctr2" id="m0">3</td>
+                <td class="ctr2">26 of 245</td>
+                <td class="ctr2">89%</td>
+                <td class="ctr2">10 of 18</td>
+                <td class="ctr2">44%</td>
+                <td class="ctr1">9</td>
+                <td class="ctr2">24</td>
+                <td class="ctr1">14</td>
+                <td class="ctr2">79</td>
+                <td class="ctr1">1</td>
+                <td class="ctr2">15</td>
+                <td class="ctr1">0</td>
+                <td class="ctr2">3</td>
             </tr>
         </tbody>
     </table>
