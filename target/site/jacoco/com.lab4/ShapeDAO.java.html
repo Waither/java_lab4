@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShapeDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lab4</a> &gt; <a href="index.source.html" class="el_package">com.lab4</a> &gt; <span class="el_source">ShapeDAO.java</span></div><h1>ShapeDAO.java</h1><pre class="source lang-java linenums">package com.lab4;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+<span class="fc" id="L7">public class ShapeDAO {</span>
+
+    public void saveShape(Shape shape) {
+<span class="fc" id="L10">        Transaction transaction = null;</span>
+<span class="fc" id="L11">        try (Session session = new Configuration().configure().buildSessionFactory().openSession()) {</span>
+<span class="fc" id="L12">            transaction = session.beginTransaction();</span>
+
+<span class="fc" id="L14">            Shape existingShape = session.get(Shape.class, shape.getId());</span>
+<span class="fc bfc" id="L15" title="All 2 branches covered.">            if (existingShape != null) {</span>
+<span class="fc" id="L16">                throw new IllegalArgumentException(&quot;Shape with ID &quot; + shape.getId() + &quot; already exists.&quot;);</span>
+            }
+
+<span class="fc" id="L19">            session.save(shape);</span>
+<span class="fc" id="L20">            transaction.commit();</span>
+        }
+<span class="fc" id="L22">        catch (Exception e) {</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">            if (transaction != null) {</span>
+<span class="nc" id="L24">                transaction.rollback();</span>
+            }
+<span class="nc" id="L26">            e.printStackTrace();</span>
+<span class="fc" id="L27">        }</span>
+<span class="fc" id="L28">    }</span>
+
+
+    public Shape getShape(int id) {
+<span class="fc" id="L32">        try (Session session = new Configuration().configure().buildSessionFactory().openSession()) {</span>
+<span class="fc" id="L33">            return session.get(Shape.class, id);</span>
+        }
+<span class="nc" id="L35">        catch (Exception e) {</span>
+<span class="nc" id="L36">            e.printStackTrace();</span>
+<span class="nc" id="L37">            return null;</span>
+        }
+    }
+
+    public void updateShape(Shape shape) {
+<span class="fc" id="L42">        Transaction transaction = null;</span>
+<span class="fc" id="L43">        try (Session session = new Configuration().configure().buildSessionFactory().openSession()) {</span>
+<span class="fc" id="L44">            transaction = session.beginTransaction();</span>
+<span class="fc" id="L45">            session.update(shape);</span>
+<span class="fc" id="L46">            transaction.commit();</span>
+        }
+<span class="nc" id="L48">        catch (Exception e) {</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (transaction != null) {</span>
+<span class="nc" id="L50">                transaction.rollback();</span>
+            }
+<span class="nc" id="L52">            e.printStackTrace();</span>
+<span class="fc" id="L53">        }</span>
+<span class="fc" id="L54">    }</span>
+
+    public void deleteShape(Shape shape) {
+<span class="fc" id="L57">        Transaction transaction = null;</span>
+<span class="fc" id="L58">        try (Session session = new Configuration().configure().buildSessionFactory().openSession()) {</span>
+<span class="fc" id="L59">            transaction = session.beginTransaction();</span>
+<span class="fc" id="L60">            session.delete(shape);</span>
+<span class="fc" id="L61">            transaction.commit();</span>
+        }
+<span class="nc" id="L63">        catch (Exception e) {</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (transaction != null) {</span>
+<span class="nc" id="L65">                transaction.rollback();</span>
+            }
+<span class="nc" id="L67">            e.printStackTrace();</span>
+<span class="fc" id="L68">        }</span>
+<span class="fc" id="L69">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
