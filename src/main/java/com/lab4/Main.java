@@ -8,7 +8,7 @@ public class Main {
         shapeDAO.saveShape(circle);
         System.out.println("Zapisano ksztalt: " + circle.getName() + " o powierzchni: " + circle.getArea() + "\n");
 
-        Shape retrievedCircle = shapeDAO.getShape(circle.getId());
+        Shape retrievedCircle = shapeDAO.getShape(circle.getId());a
         if (retrievedCircle != null) {
             System.out.println("Pobrano ksztalt: " + retrievedCircle.getName() + " o powierzchni: " + retrievedCircle.getArea() + "\n");
         }
