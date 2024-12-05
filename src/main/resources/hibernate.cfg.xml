@@ -17,9 +17,9 @@
         <property name="hibernate.generate_statistics">false</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="com.lab5.Shape"/>
-        <mapping class="com.lab5.Circle"/>
-        <mapping class="com.lab5.Rectangle"/>
-        <mapping class="com.lab5.Triangle"/>
+        <mapping class="com.lab4.Shape"/>
+        <mapping class="com.lab4.Circle"/>
+        <mapping class="com.lab4.Rectangle"/>
+        <mapping class="com.lab4.Triangle"/>
     </session-factory>
 </hibernate-configuration>

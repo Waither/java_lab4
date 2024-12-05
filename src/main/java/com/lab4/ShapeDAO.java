@@ -1,4 +1,4 @@
-package com.lab5;
+package com.lab4;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
