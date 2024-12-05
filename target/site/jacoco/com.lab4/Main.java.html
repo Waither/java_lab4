@@ -4,36 +4,59 @@
     public static void main(String[] args) {
 <span class="fc" id="L5">        ShapeDAO shapeDAO = new ShapeDAO();</span>
 
-<span class="fc" id="L7">        Shape circle = new Shape(&quot;Circle&quot;, 12.56);</span>
-<span class="fc" id="L8">        shapeDAO.saveShape(circle);</span>
-<span class="fc" id="L9">        System.out.println(&quot;Zapisano ksztalt: &quot; + circle.getName() + &quot; o powierzchni: &quot; + circle.getArea() + &quot;\n&quot;);</span>
+<span class="fc" id="L7">        Shape triangle = new Triangle(&quot;Triangle&quot;, 9, 5, 5.4);</span>
+<span class="fc" id="L8">        Shape circle = new Circle(&quot;Circle&quot;, 7);</span>
+<span class="fc" id="L9">        Shape rectangle = new Rectangle(&quot;Rectangle&quot;, 4, 6);</span>
 
-<span class="fc" id="L11">        Shape retrievedCircle = shapeDAO.getShape(circle.getId());</span>
-<span class="pc bpc" id="L12" title="1 of 2 branches missed.">        if (retrievedCircle != null) {</span>
-<span class="fc" id="L13">            System.out.println(&quot;Pobrano ksztalt: &quot; + retrievedCircle.getName() + &quot; o powierzchni: &quot; + retrievedCircle.getArea() + &quot;\n&quot;);</span>
-        }
+<span class="fc" id="L11">        shapeDAO.saveShape(triangle);</span>
+<span class="fc" id="L12">        shapeDAO.saveShape(circle);</span>
+<span class="fc" id="L13">        shapeDAO.saveShape(rectangle);</span>
 
-<span class="pc bpc" id="L16" title="1 of 2 branches missed.">        if (retrievedCircle != null) {</span>
-<span class="fc" id="L17">            retrievedCircle.setName(&quot;Updated Circle&quot;);</span>
-<span class="fc" id="L18">            retrievedCircle.setArea(15.75);</span>
-<span class="fc" id="L19">            shapeDAO.updateShape(retrievedCircle);</span>
-<span class="fc" id="L20">            System.out.println(&quot;Zaktualizowano ksztalt: &quot; + retrievedCircle.getName() + &quot; o powierzchni: &quot; + retrievedCircle.getArea() + &quot;\n&quot;);</span>
-        }
+<span class="fc" id="L15">        System.out.println(&quot;Pobrane figury:&quot;);</span>
+<span class="fc" id="L16">        Shape retrievedTriangle = shapeDAO.getShape(Triangle.class, triangle.getId());</span>
+<span class="fc" id="L17">        Shape retrievedCircle = shapeDAO.getShape(Circle.class, circle.getId());</span>
+<span class="fc" id="L18">        Shape retrievedRectangle = shapeDAO.getShape(Rectangle.class, rectangle.getId());</span>
 
-<span class="fc" id="L23">        Shape updatedCircle = shapeDAO.getShape(circle.getId());</span>
-<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (updatedCircle != null) {</span>
-<span class="fc" id="L25">            System.out.println(&quot;Zaktualizowany ksztalt (z bazy): &quot; + updatedCircle.getName() + &quot; o powierzchni: &quot; + updatedCircle.getArea() + &quot;\n&quot;);</span>
-        }
+<span class="fc" id="L20">        System.out.println(retrievedTriangle.getName());</span>
+<span class="fc" id="L21">        System.out.println(retrievedCircle.getName());</span>
+<span class="fc" id="L22">        System.out.println(retrievedRectangle.getName());</span>
 
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if (updatedCircle != null) {</span>
-<span class="fc" id="L29">            shapeDAO.deleteShape(updatedCircle);</span>
-<span class="fc" id="L30">            System.out.println(&quot;Ksztalt o ID &quot; + updatedCircle.getId() + &quot; został pomyślnie usunięty.\n&quot;);</span>
-        }
+<span class="fc" id="L24">        retrievedTriangle.setName(&quot;Updated Triangle&quot;);</span>
+<span class="fc" id="L25">        ((Triangle) retrievedTriangle).setB(12.5);</span>
+<span class="fc" id="L26">        shapeDAO.updateShape(retrievedTriangle);</span>
 
-<span class="fc" id="L33">        Shape deletedShape = shapeDAO.getShape(circle.getId());</span>
-<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (deletedShape == null) {</span>
-<span class="fc" id="L35">            System.out.println(&quot;Ksztalt o ID &quot; + circle.getId() + &quot; został pomyślnie usunięty z bazy danych.\n&quot;);</span>
-        }
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L28">        retrievedCircle.setName(&quot;Updated Circle&quot;);</span>
+<span class="fc" id="L29">        ((Circle) retrievedCircle).setRadius(9.5);</span>
+<span class="fc" id="L30">        shapeDAO.updateShape(retrievedCircle);</span>
+
+<span class="fc" id="L32">        retrievedRectangle.setName(&quot;Updated Rectangle&quot;);</span>
+<span class="fc" id="L33">        ((Rectangle) retrievedRectangle).setWidth(10);</span>
+<span class="fc" id="L34">        shapeDAO.updateShape(retrievedRectangle);</span>
+
+<span class="fc" id="L36">        System.out.println(&quot;\nPo aktualizacji:&quot;);</span>
+<span class="fc" id="L37">        retrievedTriangle = shapeDAO.getShape(Triangle.class, triangle.getId());</span>
+<span class="fc" id="L38">        retrievedCircle = shapeDAO.getShape(Circle.class, circle.getId());</span>
+<span class="fc" id="L39">        retrievedRectangle = shapeDAO.getShape(Rectangle.class, rectangle.getId());</span>
+
+<span class="fc" id="L41">        System.out.println(retrievedTriangle.getName() + &quot;, area: &quot; + ((Triangle) retrievedTriangle).getArea() + &quot;, perimeter: &quot; + ((Triangle) retrievedTriangle).getPerimeter());</span>
+<span class="fc" id="L42">        System.out.println(retrievedCircle.getName() + &quot;, area: &quot; + ((Circle) retrievedCircle).getArea() + &quot;, perimeter: &quot; + ((Circle) retrievedCircle).getPerimeter());</span>
+<span class="fc" id="L43">        System.out.println(retrievedRectangle.getName() + &quot;, area: &quot; + ((Rectangle) retrievedRectangle).getArea() + &quot;, perimeter: &quot; + ((Rectangle) retrievedRectangle).getPerimeter());</span>
+
+<span class="fc" id="L45">        System.out.println(&quot;\nUsuwanie figur...&quot;);</span>
+<span class="fc" id="L46">        shapeDAO.deleteShape(triangle);</span>
+<span class="fc" id="L47">        shapeDAO.deleteShape(circle);</span>
+<span class="fc" id="L48">        shapeDAO.deleteShape(rectangle);</span>
+
+<span class="fc" id="L50">        System.out.println(&quot;\nPotwierdzenie usunięcia:&quot;);</span>
+<span class="fc" id="L51">        Shape deletedTriangle = shapeDAO.getShape(Triangle.class, triangle.getId());</span>
+<span class="fc" id="L52">        Shape deletedCircle = shapeDAO.getShape(Circle.class, circle.getId());</span>
+<span class="fc" id="L53">        Shape deletedRectangle = shapeDAO.getShape(Rectangle.class, rectangle.getId());</span>
+
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        System.out.println(deletedTriangle == null ? &quot;Triangle został usunięty.&quot; : &quot;Triangle istnieje.&quot;);</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        System.out.println(deletedCircle == null ? &quot;Circle został usunięty.&quot; : &quot;Circle istnieje.&quot;);</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        System.out.println(deletedRectangle == null ? &quot;Rectangle został usunięty.&quot; : &quot;Rectangle istnieje.&quot;);</span>
+
+<span class="fc" id="L59">        ShapeDAO.shutdown();</span>
+<span class="fc" id="L60">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

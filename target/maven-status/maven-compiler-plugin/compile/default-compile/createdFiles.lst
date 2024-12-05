@@ -1,3 +1,6 @@
 com\lab4\Main.class
-com\lab4\Shape.class
+com\lab4\Rectangle.class
 com\lab4\ShapeDAO.class
+com\lab4\Circle.class
+com\lab4\Triangle.class
+com\lab4\Shape.class

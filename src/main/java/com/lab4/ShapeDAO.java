@@ -2,25 +2,43 @@ package com.lab4;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.SessionFactory;
 
 public class ShapeDAO {
 
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private static SessionFactory buildSessionFactory() {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure()
+                .build();
+        try {
+            return new MetadataSources(registry)
+                    .buildMetadata()
+                    .buildSessionFactory();
+        }
+        catch (Exception e) {
+            StandardServiceRegistryBuilder.destroy(registry);
+            throw new ExceptionInInitializerError("SessionFactory initialization failed: " + e);
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
     public void saveShape(Shape shape) {
         Transaction transaction = null;
-        try (Session session = new Configuration().configure().buildSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-
-            Shape existingShape = session.get(Shape.class, shape.getId());
-            if (existingShape != null) {
-                throw new IllegalArgumentException("Shape with ID " + shape.getId() + " already exists.");
-            }
-
-            session.save(shape);
+            session.persist(shape);
             transaction.commit();
         }
         catch (Exception e) {
-            if (transaction != null) {
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
             e.printStackTrace();
@@ -28,9 +46,9 @@ public class ShapeDAO {
     }
 
 
-    public Shape getShape(int id) {
-        try (Session session = new Configuration().configure().buildSessionFactory().openSession()) {
-            return session.get(Shape.class, id);
+    public Shape getShape(Class<? extends Shape> shapeClass, int id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.find(shapeClass, id);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -40,13 +58,13 @@ public class ShapeDAO {
 
     public void updateShape(Shape shape) {
         Transaction transaction = null;
-        try (Session session = new Configuration().configure().buildSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            session.update(shape);
+            session.merge(shape);
             transaction.commit();
         }
         catch (Exception e) {
-            if (transaction != null) {
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
             e.printStackTrace();
@@ -55,16 +73,22 @@ public class ShapeDAO {
 
     public void deleteShape(Shape shape) {
         Transaction transaction = null;
-        try (Session session = new Configuration().configure().buildSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            session.delete(shape);
+            session.remove(shape);
             transaction.commit();
         }
         catch (Exception e) {
-            if (transaction != null) {
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
             e.printStackTrace();
+        }
+    }
+
+    public static void shutdown() {
+        if (sessionFactory != null) {
+            sessionFactory.close();
         }
     }
 }

@@ -1,39 +1,31 @@
 package com.lab4;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
-@Entity
-@Table(name = "shapes")
-public class Shape {
+@MappedSuperclass
+public abstract class Shape {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", nullable = false, length = 100)
     private String name;
-
-    @Column(name = "area", nullable = false)
-    private double area;
 
     public Shape() {}
 
-    public Shape(String name, double area) {
+    public Shape(String name) {
         this.name = name;
-        this.area = area;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -44,11 +36,6 @@ public class Shape {
         this.name = name;
     }
 
-    public double getArea() {
-        return area;
-    }
-
-    public void setArea(double area) {
-        this.area = area;
-    }
+    public abstract double getArea();
+    public abstract double getPerimeter();
 }

@@ -4,35 +4,58 @@ public class Main {
     public static void main(String[] args) {
         ShapeDAO shapeDAO = new ShapeDAO();
 
-        Shape circle = new Shape("Circle", 12.56);
+        Shape triangle = new Triangle("Triangle", 9, 5, 5.4);
+        Shape circle = new Circle("Circle", 7);
+        Shape rectangle = new Rectangle("Rectangle", 4, 6);
+
+        shapeDAO.saveShape(triangle);
         shapeDAO.saveShape(circle);
-        System.out.println("Zapisano ksztalt: " + circle.getName() + " o powierzchni: " + circle.getArea() + "\n");
+        shapeDAO.saveShape(rectangle);
 
-        Shape retrievedCircle = shapeDAO.getShape(circle.getId());
-        if (retrievedCircle != null) {
-            System.out.println("Pobrano ksztalt: " + retrievedCircle.getName() + " o powierzchni: " + retrievedCircle.getArea() + "\n");
-        }
+        System.out.println("Pobrane figury:");
+        Shape retrievedTriangle = shapeDAO.getShape(Triangle.class, triangle.getId());
+        Shape retrievedCircle = shapeDAO.getShape(Circle.class, circle.getId());
+        Shape retrievedRectangle = shapeDAO.getShape(Rectangle.class, rectangle.getId());
 
-        if (retrievedCircle != null) {
-            retrievedCircle.setName("Updated Circle");
-            retrievedCircle.setArea(15.75);
-            shapeDAO.updateShape(retrievedCircle);
-            System.out.println("Zaktualizowano ksztalt: " + retrievedCircle.getName() + " o powierzchni: " + retrievedCircle.getArea() + "\n");
-        }
+        System.out.println(retrievedTriangle.getName());
+        System.out.println(retrievedCircle.getName());
+        System.out.println(retrievedRectangle.getName());
 
-        Shape updatedCircle = shapeDAO.getShape(circle.getId());
-        if (updatedCircle != null) {
-            System.out.println("Zaktualizowany ksztalt (z bazy): " + updatedCircle.getName() + " o powierzchni: " + updatedCircle.getArea() + "\n");
-        }
+        retrievedTriangle.setName("Updated Triangle");
+        ((Triangle) retrievedTriangle).setB(12.5);
+        shapeDAO.updateShape(retrievedTriangle);
 
-        if (updatedCircle != null) {
-            shapeDAO.deleteShape(updatedCircle);
-            System.out.println("Ksztalt o ID " + updatedCircle.getId() + " został pomyślnie usunięty.\n");
-        }
+        retrievedCircle.setName("Updated Circle");
+        ((Circle) retrievedCircle).setRadius(9.5);
+        shapeDAO.updateShape(retrievedCircle);
 
-        Shape deletedShape = shapeDAO.getShape(circle.getId());
-        if (deletedShape == null) {
-            System.out.println("Ksztalt o ID " + circle.getId() + " został pomyślnie usunięty z bazy danych.\n");
-        }
+        retrievedRectangle.setName("Updated Rectangle");
+        ((Rectangle) retrievedRectangle).setWidth(10);
+        shapeDAO.updateShape(retrievedRectangle);
+
+        System.out.println("\nPo aktualizacji:");
+        retrievedTriangle = shapeDAO.getShape(Triangle.class, triangle.getId());
+        retrievedCircle = shapeDAO.getShape(Circle.class, circle.getId());
+        retrievedRectangle = shapeDAO.getShape(Rectangle.class, rectangle.getId());
+
+        System.out.println(retrievedTriangle.getName() + ", area: " + ((Triangle) retrievedTriangle).getArea() + ", perimeter: " + ((Triangle) retrievedTriangle).getPerimeter());
+        System.out.println(retrievedCircle.getName() + ", area: " + ((Circle) retrievedCircle).getArea() + ", perimeter: " + ((Circle) retrievedCircle).getPerimeter());
+        System.out.println(retrievedRectangle.getName() + ", area: " + ((Rectangle) retrievedRectangle).getArea() + ", perimeter: " + ((Rectangle) retrievedRectangle).getPerimeter());
+
+        System.out.println("\nUsuwanie figur...");
+        shapeDAO.deleteShape(triangle);
+        shapeDAO.deleteShape(circle);
+        shapeDAO.deleteShape(rectangle);
+
+        System.out.println("\nPotwierdzenie usunięcia:");
+        Shape deletedTriangle = shapeDAO.getShape(Triangle.class, triangle.getId());
+        Shape deletedCircle = shapeDAO.getShape(Circle.class, circle.getId());
+        Shape deletedRectangle = shapeDAO.getShape(Rectangle.class, rectangle.getId());
+
+        System.out.println(deletedTriangle == null ? "Triangle został usunięty." : "Triangle istnieje.");
+        System.out.println(deletedCircle == null ? "Circle został usunięty." : "Circle istnieje.");
+        System.out.println(deletedRectangle == null ? "Rectangle został usunięty." : "Rectangle istnieje.");
+
+        ShapeDAO.shutdown();
     }
 }
