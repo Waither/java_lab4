@@ -1,71 +1,208 @@
 Hibernate: 
-    select
-        s1_0.id,
-        s1_0.area,
-        s1_0.name 
-    from
-        shapes s1_0 
-    where
-        s1_0.id=?
+    insert 
+    into
+        triangles
+        (a, b, c, name) 
+    values
+        (?, ?, ?, ?)
 Hibernate: 
     insert 
     into
-        shapes
-        (area, name) 
+        circles
+        (name, radius) 
     values
         (?, ?)
-Zapisano ksztalt: Circle o powierzchni: 12.56
-
+Hibernate: 
+    insert 
+    into
+        rectangles
+        (height, name, width) 
+    values
+        (?, ?, ?)
+Pobrane figury:
 Hibernate: 
     select
-        s1_0.id,
-        s1_0.area,
-        s1_0.name 
+        t1_0.id,
+        t1_0.a,
+        t1_0.b,
+        t1_0.c,
+        t1_0.name 
     from
-        shapes s1_0 
+        triangles t1_0 
     where
-        s1_0.id=?
-Pobrano ksztalt: Circle o powierzchni: 12.56
-
+        t1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.name,
+        c1_0.radius 
+    from
+        circles c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        r1_0.id,
+        r1_0.height,
+        r1_0.name,
+        r1_0.width 
+    from
+        rectangles r1_0 
+    where
+        r1_0.id=?
+Triangle
+Circle
+Rectangle
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.a,
+        t1_0.b,
+        t1_0.c,
+        t1_0.name 
+    from
+        triangles t1_0 
+    where
+        t1_0.id=?
 Hibernate: 
     update
-        shapes 
+        triangles 
     set
-        area=?,
+        a=?,
+        b=?,
+        c=?,
         name=? 
     where
         id=?
-Zaktualizowano ksztalt: Updated Circle o powierzchni: 15.75
-
 Hibernate: 
     select
-        s1_0.id,
-        s1_0.area,
-        s1_0.name 
+        c1_0.id,
+        c1_0.name,
+        c1_0.radius 
     from
-        shapes s1_0 
+        circles c1_0 
     where
-        s1_0.id=?
-Zaktualizowany ksztalt (z bazy): Updated Circle o powierzchni: 15.75
+        c1_0.id=?
+Hibernate: 
+    update
+        circles 
+    set
+        name=?,
+        radius=? 
+    where
+        id=?
+Hibernate: 
+    select
+        r1_0.id,
+        r1_0.height,
+        r1_0.name,
+        r1_0.width 
+    from
+        rectangles r1_0 
+    where
+        r1_0.id=?
+Hibernate: 
+    update
+        rectangles 
+    set
+        height=?,
+        name=?,
+        width=? 
+    where
+        id=?
 
+Po aktualizacji:
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.a,
+        t1_0.b,
+        t1_0.c,
+        t1_0.name 
+    from
+        triangles t1_0 
+    where
+        t1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.name,
+        c1_0.radius 
+    from
+        circles c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        r1_0.id,
+        r1_0.height,
+        r1_0.name,
+        r1_0.width 
+    from
+        rectangles r1_0 
+    where
+        r1_0.id=?
+Updated Triangle, area: 21.394438383608005, perimeter: 26.9
+Updated Circle, area: 283.5287369864788, perimeter: 59.690260418206066
+Updated Rectangle, area: 60.0, perimeter: 32.0
+
+Usuwanie figur...
 Hibernate: 
     delete 
     from
-        shapes 
+        triangles 
     where
         id=?
-Ksztalt o ID 1 został pomyślnie usunięty.
+Hibernate: 
+    delete 
+    from
+        circles 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        rectangles 
+    where
+        id=?
 
+Potwierdzenie usunięcia:
 Hibernate: 
     select
-        s1_0.id,
-        s1_0.area,
-        s1_0.name 
+        t1_0.id,
+        t1_0.a,
+        t1_0.b,
+        t1_0.c,
+        t1_0.name 
     from
-        shapes s1_0 
+        triangles t1_0 
     where
-        s1_0.id=?
-Ksztalt o ID 1 został pomyślnie usunięty z bazy danych.
+        t1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.name,
+        c1_0.radius 
+    from
+        circles c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        r1_0.id,
+        r1_0.height,
+        r1_0.name,
+        r1_0.width 
+    from
+        rectangles r1_0 
+    where
+        r1_0.id=?
+Triangle został usunięty.
+Circle został usunięty.
+Rectangle został usunięty.
+
+Process finished with exit code 0
+
 
 
 
@@ -94,37 +231,35 @@ Ksztalt o ID 1 został pomyślnie usunięty z bazy danych.
         <tfoot>
             <tr>
                 <td>Total</td>
-                <td class="ctr2">26 of 245</td>
-                <td class="ctr2">89%</td>
-                <td class="ctr2">10 of 18</td>
-                <td class="ctr2">44%</td>
-                <td class="ctr1">9</td>
-                <td class="ctr2">24</td>
-                <td class="ctr1">14</td>
-                <td class="ctr2">79</td>
+                <td class="bar">31 of 508</td>
+                <td class="ctr2">93%</td>
+                <td class="bar">13 of 20</td>
+                <td class="ctr2">35%</td>
+                <td class="ctr1">11</td>
+                <td class="ctr2">51</td>
+                <td class="ctr1">7</td>
+                <td class="ctr2">147</td>
                 <td class="ctr1">1</td>
-                <td class="ctr2">15</td>
+                <td class="ctr2">41</td>
                 <td class="ctr1">0</td>
-                <td class="ctr2">3</td>
+                <td class="ctr2">6</td>
             </tr>
         </tfoot>
         <tbody>
             <tr>
-                <td id="a0">
-                    <a href="com.lab4/index.html" class="el_package">com.lab4</a>
-                </td>
-                <td class="ctr2">26 of 245</td>
-                <td class="ctr2">89%</td>
-                <td class="ctr2">10 of 18</td>
-                <td class="ctr2">44%</td>
-                <td class="ctr1">9</td>
-                <td class="ctr2">24</td>
-                <td class="ctr1">14</td>
-                <td class="ctr2">79</td>
-                <td class="ctr1">1</td>
-                <td class="ctr2">15</td>
-                <td class="ctr1">0</td>
-                <td class="ctr2">3</td>
+                <td id="a0"><a href="com.lab4/index.html" class="el_package">com.lab4</a></td>
+                <td class="bar" id="b0">31 of 508</td>
+                <td class="ctr2" id="c0">93%</td>
+                <td class="bar" id="d0">13 of 20</td>
+                <td class="ctr2" id="e0">35%</td>
+                <td class="ctr1" id="f0">11</td>
+                <td class="ctr2" id="g0">51</td>
+                <td class="ctr1" id="h0">7</td>
+                <td class="ctr2" id="i0">147</td>
+                <td class="ctr1" id="j0">1</td>
+                <td class="ctr2" id="k0">41</td>
+                <td class="ctr1" id="l0">0</td>
+                <td class="ctr2" id="m0">6</td></tr>
             </tr>
         </tbody>
     </table>
