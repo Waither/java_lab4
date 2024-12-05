@@ -1,4 +1,4 @@
-package com.lab4;
+package com.lab5;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

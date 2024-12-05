@@ -247,7 +247,7 @@ Process finished with exit code 0
         </tfoot>
         <tbody>
             <tr>
-                <td id="a0"><a href="com.lab4/index.html" class="el_package">com.lab4</a></td>
+                <td id="a0"><a href="com.lab4/index.html" class="el_package">com.lab5</a></td>
                 <td class="bar" id="b0">31 of 508</td>
                 <td class="ctr2" id="c0">93%</td>
                 <td class="bar" id="d0">13 of 20</td>
